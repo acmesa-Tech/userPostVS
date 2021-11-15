@@ -1,0 +1,58 @@
+<!Doctype Html>  
+<Html>     
+<Head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.css"/>
+  <script type="text/javascript" src="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.js"></script>
+ <!--   <script src="js/jquery-3.2.0.js"></script> 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>   
+    <script src="js/userPost.jquery.js"></script> -->
+    <script src="js_directory/jquery.1.7.min.js"></script>
+    <script>
+    jQuery.noConflict();
+    jQuery(document).ready(
+    function($){
+        var arrayReturn = [];
+        $.ajax({
+        url: "https://jsonplaceholder.typicode.com/users",
+        async: false,
+        dataType: 'json',
+        success: function (data) {
+            for (var i = 0, len = data.length; i < len; i++) {
+                arrayReturn.push([ '<span id="userId" value="'+data[i].id+'">'+data[i].id+'</span>', '<a href="userPosts.html?id='+ data[i].id + '" target="_blank">'+data[i].name+'</a>', data[i].username ]);
+            }
+        inittable(arrayReturn);
+        }
+        });
+
+    function inittable(data) {	
+        $('#users').DataTable( {
+            "aaData": data
+        } );
+    }
+    
+    });</script>
+ 
+    <Title>     
+        Add the jQuery file into Html by including CDN  
+    </Title>  
+</Head>  
+<Body>   
+    	
+    <table id="users" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>UserName</th>
+        </tr>
+    </thead>
+
+    </table>
+    
+</Body>   
+                                           
+</Html>  
+
